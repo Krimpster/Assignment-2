@@ -4,7 +4,7 @@ public class Entity {
 
     public int id;
     protected String name;
-    private static int nextId = 6;
+    private static int nextId = 1;
 
     public Entity(String name) {
         this.id = nextId;

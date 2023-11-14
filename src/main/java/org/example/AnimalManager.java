@@ -8,10 +8,9 @@ public class AnimalManager {
     Scanner scan = new Scanner(System.in);
     public void AnimalMenu(){
         Farm farm = new Farm();
-        System.out.println("This is the crop menu, what would you like to do?");
         boolean looping = true;
         while (looping) {
-            System.out.println("This is the crop menu, what would you like to do?");
+            System.out.println("This is the animal menu, what would you like to do?");
             System.out.println("1. View animals");
             System.out.println("2. Add animals");
             System.out.println("3. Remove animals");
@@ -20,7 +19,9 @@ public class AnimalManager {
             String check = scan.nextLine();
             switch (check) {
                 case "1":
-                    ViewAnimals();
+                    for (Animal animal : animalList){
+                        animal.GetDescription();
+                    }
                     break;
                 case "2":
                     AddAnimal();
@@ -42,7 +43,8 @@ public class AnimalManager {
     }
     private void ViewAnimals(){
         for (Animal animal : animalList){
-            animal.GetDescription();
+            System.out.println("ID: " + animal.getId() + ", name: " + animal.getName() + ", species: "
+                    + animal.getSpecies() + ", eats crops with the IDs: " + animal.getAcceptableCropTypes() + ".");
         }
     }
     private void AddAnimal(){
@@ -56,6 +58,7 @@ public class AnimalManager {
         while(looping){
             String check = scan.nextLine();
             if(check.equals("*")){
+                System.out.println("Animal successfully added!");
                 looping = false;
             }
             else{
@@ -71,7 +74,7 @@ public class AnimalManager {
         int check = Integer.parseInt(scan.nextLine());
         for(int i = 0; animalList.size() > i; i++){
             if(animalList.get(i).getId() == check){
-                animalList.remove(check);
+                animalList.remove(i);
                 System.out.println("Animal with ID " + check + " successfully removed");
                 removed = true;
             }

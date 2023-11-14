@@ -14,7 +14,6 @@ public class CropManager {
     }
     public void CropMenu() {
         Farm farm = new Farm();
-        System.out.println("This is the crop menu, what would you like to do?");
         boolean looping = true;
         while (looping) {
             System.out.println("This is the crop menu, what would you like to do?");
@@ -25,7 +24,9 @@ public class CropManager {
             String check = scan.nextLine();
             switch (check) {
                 case "1":
-                    ViewCrops();
+                    for (Crop crop : cropList){
+                        crop.GetDescription();
+                    }
                     break;
                 case "2":
                     AddCrop();
@@ -44,7 +45,8 @@ public class CropManager {
     }
     public void ViewCrops () {
         for(Crop crop : cropList){
-            crop.GetDescription();
+            System.out.println("Crop ID: " + crop.getId() + ", Crop name: " +  crop.getName()
+                    + ", Crop type: " + crop.getCropType() + ", quantity: " + crop.getQuantity());;
         }
     }
     private void AddCrop () {
@@ -54,7 +56,8 @@ public class CropManager {
         int number = Integer.parseInt(check);
         for(Crop crop : cropList){
             if(crop.id == number){
-                crop.AddCrop(number);
+                crop.AddCrop(number, cropList);
+                break;
             }
             else{
                 System.out.println("Crop ID not found, let's add it to the list instead.\nWhat should the crops name be: ");
@@ -65,6 +68,7 @@ public class CropManager {
                 int quantity = Integer.parseInt(scan.nextLine());
                 cropList.add(new Crop(name, type, quantity));
                 System.out.println("Crop added successfully!");
+                break;
             }
         }
     }
@@ -75,7 +79,7 @@ public class CropManager {
         int check = Integer.parseInt(scan.nextLine());
         for(int i = 0; cropList.size() > i; i++){
             if(cropList.get(i).getId() == check){
-                cropList.remove(check);
+                cropList.remove(i);
                 System.out.println("Crop with ID " + check + " successfully removed");
                 removed = true;
             }

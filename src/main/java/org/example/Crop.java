@@ -20,11 +20,11 @@ public class Crop extends Entity{
                 + " type and there are " + getQuantity() + " left of it in stock.\n");
     }
 
-    public void AddCrop(int id){
+    public void AddCrop(int id, ArrayList<Crop> cropList){
         System.out.println("Crop ID found, input how many crops you want to add to the total: ");
         String check = scan.nextLine();
         int number2 = Integer.parseInt(check);
-        for(Crop crop : CropManager.GetCrops()){
+        for(Crop crop : cropList){
             if(id == crop.id) {
                 setQuantity(quantity, number2);
             }

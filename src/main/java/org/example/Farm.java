@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Farm {
     Scanner scan = new Scanner(System.in);
-
     AnimalManager aManager = new AnimalManager();
     CropManager cManager = new CropManager();
     public void MainMenu(){
@@ -20,7 +19,7 @@ public class Farm {
             switch(check) {
                 case "1":
                     aManager.AnimalMenu();
-                    cManager.GetCrops();
+                    //cManager.GetCrops();
                     looping = false;
                     break;
                 case "2":
@@ -58,7 +57,7 @@ public class Farm {
     private void Save(){
 
     }
-    private void Load(){
+    public void Load(){
         
     }
 }
