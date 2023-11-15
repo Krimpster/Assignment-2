@@ -1,5 +1,8 @@
 package org.example;
 
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Farm {
@@ -54,10 +57,74 @@ public class Farm {
             }
         }
     }
-    private void Save(){
 
+    File folder = new File("folder");
+    File animals =  new File("folder/animals.txt");
+    File crops = new File("folder/crops.txt");
+    private void Save(){
+        try {
+            FileWriter fw = new FileWriter(animals);
+            BufferedWriter bw = new BufferedWriter(fw);
+            for(Animal a : aManager.animalList){
+                bw.write(a.getCSV());
+                bw.newLine();
+            }
+            bw.close();
+        }
+        catch(IOException e){
+
+        }
+        try {
+            FileWriter fw = new FileWriter(crops);
+            BufferedWriter bw = new BufferedWriter(fw);
+            for(Crop c : cManager.cropList){
+                bw.write(c.getCSV());
+                bw.newLine();
+            }
+            bw.close();
+        }
+        catch(IOException e){
+
+        }
     }
-    public void Load(){
-        
+    public void Load() {
+        try {
+            FileReader fr = new FileReader(crops);
+            BufferedReader br = new BufferedReader(fr);
+            String line = br.readLine();
+            try {
+                String[] string = line.split(",");
+                String name = string[1];
+                String cropType = string[2];
+                int quantity = Integer.parseInt(string[3]);
+                cManager.ToList(name, cropType, quantity);
+            } catch (Exception e) {
+
+            }
+            line = br.readLine();
+        } catch (IOException e) {
+
+        }
+        try {
+            FileReader fr = new FileReader(animals);
+            BufferedReader br = new BufferedReader(fr);
+            String line = br.readLine();
+            try {
+                String[] string = line.split(",");
+                String name = string[1];
+                String species = string[2];
+                String[] string2 = line.split("@");
+                ArrayList<String> accList = new ArrayList<>();
+                for (int i = 0; i < string2.length; i++) {
+                    accList.add(string2[i]);
+                }
+                aManager.ToList(name, species, accList);
+            } catch (Exception e) {
+
+            }
+            line = br.readLine();
+        } catch (IOException e) {
+
+        }
     }
 }

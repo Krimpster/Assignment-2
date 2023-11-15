@@ -4,16 +4,18 @@ public class Entity {
 
     public int id;
     protected String name;
-    private static int nextId = 1;
 
-    public Entity(String name) {
-        this.id = nextId;
-        nextId++;
+    public Entity(int id, String name) {
+        this.id = id;
         this.name = name;
     }
 
     public void GetDescription(){
         System.out.println("This entity has id " +  getId() + " and is named " + getName() + ".");
+    }
+
+    public String getCSV(){
+        return id + "," + name;
     }
 
     public int getId() {

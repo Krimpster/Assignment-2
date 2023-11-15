@@ -1,4 +1,7 @@
 package org.example;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -86,6 +89,9 @@ public class AnimalManager {
     }
     private void FeedAnimals(){
 
+    }
+    public void ToList(String name, String species, ArrayList<String> accList){
+        animalList.add(new Animal(name, species, accList));
     }
     public ArrayList<Animal> GetAnimals(){
         return animalList;

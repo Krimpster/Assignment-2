@@ -43,36 +43,35 @@ public class CropManager {
             }
         }
     }
-    public void ViewCrops () {
+    public void ViewCrops() {
         for(Crop crop : cropList){
             System.out.println("Crop ID: " + crop.getId() + ", Crop name: " +  crop.getName()
                     + ", Crop type: " + crop.getCropType() + ", quantity: " + crop.getQuantity());;
         }
     }
-    private void AddCrop () {
+    private void AddCrop() {
         ViewCrops();
         System.out.println("What crop do you want to add to (ID): ");
-        String check = scan.nextLine();
-        int number = Integer.parseInt(check);
+        int idCheck = Integer.parseInt(scan.nextLine());
         for(Crop crop : cropList){
-            if(crop.id == number){
-                crop.AddCrop(number, cropList);
-                break;
-            }
-            else{
-                System.out.println("Crop ID not found, let's add it to the list instead.\nWhat should the crops name be: ");
-                String name = scan.nextLine();
-                System.out.println("What type of crop is it:");
-                String type = scan.nextLine();;
-                System.out.println("How many of these crops do you have: ");
-                int quantity = Integer.parseInt(scan.nextLine());
-                cropList.add(new Crop(name, type, quantity));
-                System.out.println("Crop added successfully!");
-                break;
+            if(crop.id == idCheck){
+                System.out.println("How many?");
+                int number = Integer.parseInt(scan.nextLine());
+                crop.AddCrop(number);
+                return;
             }
         }
+        System.out.println("Crop ID not found, let's add it to the list instead.\nWhat should the crops name be: ");
+        String name = scan.nextLine();
+        System.out.println("What type of crop is it:");
+        String type = scan.nextLine();;
+        System.out.println("How many of these crops do you have: ");
+        int quantity = Integer.parseInt(scan.nextLine());
+        Crop c = new Crop(name, type, quantity);
+        cropList.add(c);
+        System.out.println("Crop added successfully!");
     }
-    private void RemoveCrop () {
+    private void RemoveCrop() {
         boolean removed = false;
         ViewCrops();
         System.out.println("Which crop do you want to exterminate from the farm (ID): ");
@@ -88,6 +87,9 @@ public class CropManager {
             System.out.println("Animal with that ID could not be found, try again.");
             RemoveCrop();
         }
+    }
+    public void ToList(String name, String cropType, int quantity){
+        cropList.add(new Crop(name, cropType, quantity));
     }
     public static ArrayList<Crop> GetCrops(){
         return cropList;

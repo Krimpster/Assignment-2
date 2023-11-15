@@ -7,9 +7,20 @@ public class Crop extends Entity{
     public String cropType;
     private int quantity;
     Scanner scan = new Scanner(System.in);
+    static int nextId = 1;
 
+    public Crop(int id, String name, String cropType, int quantity){
+        super(nextId, name);
+        if(id >= nextId)
+        {
+            nextId = id + 1;
+        }
+        this.cropType = cropType;
+        this.quantity = quantity;
+    }
     public Crop(String name, String cropType, int quantity){
-        super(name);
+        super(nextId, name);
+        nextId++;
         this.cropType = cropType;
         this.quantity = quantity;
     }
@@ -20,27 +31,24 @@ public class Crop extends Entity{
                 + " type and there are " + getQuantity() + " left of it in stock.\n");
     }
 
-    public void AddCrop(int id, ArrayList<Crop> cropList){
-        System.out.println("Crop ID found, input how many crops you want to add to the total: ");
-        String check = scan.nextLine();
-        int number2 = Integer.parseInt(check);
-        for(Crop crop : cropList){
-            if(id == crop.id) {
-                setQuantity(quantity, number2);
-            }
-        }
+    public String getCSV(){
+        return id + "," + name + "," + cropType + "," + quantity;
     }
 
-    /*public boolean TakeCrop(int id) {
+    public void AddCrop(int quantity){
+        this.quantity += quantity;
+    }
+
+    public boolean TakeCrop(int id) {
+        boolean fed = false;
         for (Crop crop : CropManager.GetCrops()) {
             if (crop.getQuantity() >= 1) {
-                return true;
-                setQuantity2(crop.id);
-            } else {
-                return false;
+                fed = true;
+                this.quantity--;
             }
         }
-    }*/
+        return fed;
+    }
 
     public String getCropType() {
         return cropType;
@@ -54,10 +62,7 @@ public class Crop extends Entity{
         return quantity;
     }
 
-    public void setQuantity(int quantity, int addition) {
-        this.quantity = quantity + addition;
-    }
-    public void setQuantity2(int quantity) {
-        this.quantity = --quantity;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
