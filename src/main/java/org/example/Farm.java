@@ -7,8 +7,16 @@ import java.util.Scanner;
 
 public class Farm {
     Scanner scan = new Scanner(System.in);
-    AnimalManager aManager = new AnimalManager();
-    CropManager cManager = new CropManager();
+    AnimalManager aManager;
+    CropManager cManager;
+
+    public Farm(){
+        if(aManager == null && cManager == null){
+            aManager = new AnimalManager();
+            cManager = new CropManager();
+        }
+    }
+
     public void MainMenu(){
         boolean looping = true;
         while(looping) {
@@ -22,7 +30,6 @@ public class Farm {
             switch(check) {
                 case "1":
                     aManager.AnimalMenu();
-                    //cManager.GetCrops();
                     looping = false;
                     break;
                 case "2":
@@ -36,21 +43,20 @@ public class Farm {
                     Load();
                     break;
                 case "5":
-                    looping = false;
-                    break;
-                    /*System.out.println("Quitting without saving first will remove all your progress, are you sure you want that? y/n");
+                    System.out.println("Quitting without saving first will remove all your progress, are you sure you want that? y/n");
                     String check2 = scan.nextLine();
                     switch (check2){
                         case "y":
                             looping = false;
-                            break;
+                            return;
                         case "n":
                             MainMenu();
                             break;
                         default:
                             System.out.println("Input was invalid.");
                             break;
-                    }*/
+                    }
+                    return;
                 default:
                     System.out.println("Input was invalid.");
                     break;
@@ -61,12 +67,14 @@ public class Farm {
     File folder = new File("folder");
     File animals =  new File("folder/animals.txt");
     File crops = new File("folder/crops.txt");
+    File animal = new File("folder/animal.txt");
+
     private void Save(){
         try {
-            FileWriter fw = new FileWriter(animals);
+            FileWriter fw = new FileWriter(animal);
             BufferedWriter bw = new BufferedWriter(fw);
-            for(Animal a : aManager.animalList){
-                bw.write(a.getCSV());
+            for(Animal a : aManager.GetAnimals()){
+                bw.write(a.GetCSV(a.getAcceptableCropTypes()));
                 bw.newLine();
             }
             bw.close();
@@ -74,55 +82,59 @@ public class Farm {
         catch(IOException e){
 
         }
-        try {
+        /*try {
             FileWriter fw = new FileWriter(crops);
             BufferedWriter bw = new BufferedWriter(fw);
-            for(Crop c : cManager.cropList){
-                bw.write(c.getCSV());
+            for(Crop c : cManager.GetCrops()){
+                bw.write(c.GetCSV());
                 bw.newLine();
             }
             bw.close();
         }
         catch(IOException e){
 
-        }
+        }*/
     }
     public void Load() {
-        try {
+        folder.mkdir();
+        /*try {
             FileReader fr = new FileReader(crops);
             BufferedReader br = new BufferedReader(fr);
-            String line = br.readLine();
-            try {
-                String[] string = line.split(",");
-                String name = string[1];
-                String cropType = string[2];
-                int quantity = Integer.parseInt(string[3]);
-                cManager.ToList(name, cropType, quantity);
-            } catch (Exception e) {
+            String nextLine = br.readLine();
+            while(nextLine != null) {
+                try {
+                    String[] string = nextLine.split(",");
+                    String name = string[0];
+                    String cropType = string[1];
+                    int quantity = Integer.parseInt(string[2]);
+                    cManager.ToList(name, cropType, quantity);
+                } catch (Exception e) {
 
+                }
+                nextLine = br.readLine();
             }
-            line = br.readLine();
         } catch (IOException e) {
 
-        }
+        }*/
         try {
-            FileReader fr = new FileReader(animals);
+            FileReader fr = new FileReader(animal);
             BufferedReader br = new BufferedReader(fr);
-            String line = br.readLine();
-            try {
-                String[] string = line.split(",");
-                String name = string[1];
-                String species = string[2];
-                String[] string2 = line.split("@");
-                ArrayList<String> accList = new ArrayList<>();
-                for (int i = 0; i < string2.length; i++) {
-                    accList.add(string2[i]);
-                }
-                aManager.ToList(name, species, accList);
-            } catch (Exception e) {
+            String nextLine = br.readLine();
+            while(nextLine != null) {
+                try {
+                    String[] string = nextLine.split(",");
+                    String name = string[0];
+                    String species = string[1];
+                    ArrayList<String> accList = new ArrayList<>();
+                    for (int i = 2; i < string.length; i++) {
+                        accList.add(string[i]);
+                    }
+                    aManager.ToList(name, species, accList);
+                } catch (Exception e) {
 
+                }
+                nextLine = br.readLine();
             }
-            line = br.readLine();
         } catch (IOException e) {
 
         }

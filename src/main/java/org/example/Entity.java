@@ -14,7 +14,7 @@ public class Entity {
         System.out.println("This entity has id " +  getId() + " and is named " + getName() + ".");
     }
 
-    public String getCSV(){
+    public String GetCSV(){
         return id + "," + name;
     }
 

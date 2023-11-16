@@ -7,11 +7,6 @@ public class CropManager {
     public static ArrayList<Crop> cropList = new ArrayList<>();
     Scanner scan = new Scanner(System.in);
 
-    public CropManager(){
-        cropList.add(new Crop("Wheat", "Cereal", 45));
-        cropList.add(new Crop("Corn", "Cereal", 30));
-        cropList.add(new Crop("Grubs", "Insect", 67));
-    }
     public void CropMenu() {
         Farm farm = new Farm();
         boolean looping = true;
@@ -36,7 +31,7 @@ public class CropManager {
                     break;
                 case "4":
                     farm.MainMenu();
-                    break;
+                    return;
                 default:
                     System.out.println("Input was invalid!");
                     break;
@@ -91,7 +86,7 @@ public class CropManager {
     public void ToList(String name, String cropType, int quantity){
         cropList.add(new Crop(name, cropType, quantity));
     }
-    public static ArrayList<Crop> GetCrops(){
+    public ArrayList<Crop> GetCrops(){
         return cropList;
     }
 }

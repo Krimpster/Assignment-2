@@ -5,6 +5,9 @@ package org.example;
 public class Main {
     public static void main(String[] args) {
         Farm farm = new Farm();
+        AnimalManager aManager = new AnimalManager();
+        CropManager cManager = new CropManager();
+        farm.Load();
         farm.MainMenu();
     }
 }

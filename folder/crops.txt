@@ -1,0 +1,4 @@
+Wheat,Cereal,50
+Corn,Cereal,33
+Meat,Meat,45
+Grubs,Insects,40

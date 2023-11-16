@@ -31,22 +31,21 @@ public class Crop extends Entity{
                 + " type and there are " + getQuantity() + " left of it in stock.\n");
     }
 
-    public String getCSV(){
-        return id + "," + name + "," + cropType + "," + quantity;
+    @Override
+    public String GetCSV(){
+        return name + "," + cropType + "," + quantity;
     }
 
     public void AddCrop(int quantity){
         this.quantity += quantity;
     }
 
-    public boolean TakeCrop(int id) {
+    public boolean TakeCrop(int quantity) {
         boolean fed = false;
-        for (Crop crop : CropManager.GetCrops()) {
-            if (crop.getQuantity() >= 1) {
+            if (quantity >= 1) {
                 fed = true;
                 this.quantity--;
             }
-        }
         return fed;
     }
 

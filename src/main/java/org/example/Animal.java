@@ -6,6 +6,7 @@ public class Animal extends Entity{
     public String species;
     private ArrayList<String> acceptableCropTypes = new ArrayList<>();
     static int nextId = 1;
+    AnimalManager aM;
 
     public Animal(String name, String species, ArrayList<String> acceptableCropTypes) {
         super(nextId,name);
@@ -25,13 +26,18 @@ public class Animal extends Entity{
         System.out.println("This animal has the id " + getId() + ", it is named," + getName()
                 + "\nis of " + getSpecies() + " species and accepts only " + getAcceptableCropTypes() + " crops.\n");
     }
-    @Override
-    public String getCSV(){
-        return id + "," + name + "," + species;
+
+    public String GetCSV(ArrayList<String> acceptableCropTypes){
+        ArrayList<String> aList = new ArrayList<>();
+        for(String s : acceptableCropTypes) {
+            aList.add(s);
+        }
+        return name + "," + species + "," +  aList;
     }
 
-    /*public void Feed(){
-        if(takeCrop() = true){
+
+    /*public void Feed(Crop crop){
+        if(crop.TakeCrop() = true){
 
         }
     }*/

@@ -9,8 +9,11 @@ public class AnimalManager {
     ArrayList<Animal> animalList = new ArrayList<>();
     ArrayList<String> accList = new ArrayList<>();
     Scanner scan = new Scanner(System.in);
+    CropManager cManager = new CropManager();
+
     public void AnimalMenu(){
         Farm farm = new Farm();
+        farm.Load();
         boolean looping = true;
         while (looping) {
             System.out.println("This is the animal menu, what would you like to do?");
@@ -33,11 +36,15 @@ public class AnimalManager {
                     RemoveAnimal();
                     break;
                 case "4":
-                    FeedAnimals();
+                    //FeedAnimals();
                     break;
                 case "5":
                     farm.MainMenu();
-                    break;
+                    return;
+                case "6":
+                    for(Animal a : animalList){
+                        System.out.println(a.GetCSV(a.getAcceptableCropTypes()));
+                    }
                 default:
                     System.out.println("Input was invalid!");
                     break;
@@ -87,9 +94,36 @@ public class AnimalManager {
             RemoveAnimal();
         }
     }
-    private void FeedAnimals(){
 
-    }
+    // Should find a link between acceptableCropTypes and Crop ID
+    /*private void FeedAnimals(){
+        boolean looping = true;
+        System.out.println("Would you like to feed the animals? (y/n)");
+        String input = scan.nextLine();
+        while(looping) {
+            switch (input) {
+                case "y":
+                    looping = false;
+                    for (Crop c : cManager.GetCrops()){
+                        for(Animal a : animalList){
+                            for(String s : a.getAcceptableCropTypes()) {
+                                if (c.id == Integer.parseInt(s)){
+                                    a.Feed();
+                                }
+                            }
+                        }
+                }
+                    break;
+                case "n":
+                    looping = false;
+                    AnimalMenu();
+                    break;
+                case "Default":
+                    System.out.println("Input was invalid.");
+                    break;
+            }
+        }
+    }*/
     public void ToList(String name, String species, ArrayList<String> accList){
         animalList.add(new Animal(name, species, accList));
     }
