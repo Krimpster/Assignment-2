@@ -8,7 +8,6 @@ public class CropManager {
     Scanner scan = new Scanner(System.in);
 
     public void CropMenu() {
-        Farm farm = new Farm();
         boolean looping = true;
         while (looping) {
             System.out.println("This is the crop menu, what would you like to do?");
@@ -30,7 +29,7 @@ public class CropManager {
                     RemoveCrop();
                     break;
                 case "4":
-                    farm.MainMenu();
+                    Farm.MainMenu();
                     return;
                 default:
                     System.out.println("Input was invalid!");

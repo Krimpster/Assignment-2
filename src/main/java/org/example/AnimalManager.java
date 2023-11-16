@@ -12,8 +12,6 @@ public class AnimalManager {
     CropManager cManager = new CropManager();
 
     public void AnimalMenu(){
-        Farm farm = new Farm();
-        farm.Load();
         boolean looping = true;
         while (looping) {
             System.out.println("This is the animal menu, what would you like to do?");
@@ -39,7 +37,7 @@ public class AnimalManager {
                     //FeedAnimals();
                     break;
                 case "5":
-                    farm.MainMenu();
+                    Farm.MainMenu();
                     return;
                 case "6":
                     for(Animal a : animalList){

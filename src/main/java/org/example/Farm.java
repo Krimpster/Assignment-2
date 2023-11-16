@@ -6,9 +6,9 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Farm {
-    Scanner scan = new Scanner(System.in);
-    AnimalManager aManager;
-    CropManager cManager;
+    static Scanner scan = new Scanner(System.in);
+    static AnimalManager aManager;
+    static CropManager cManager;
 
     public Farm(){
         if(aManager == null && cManager == null){
@@ -17,7 +17,7 @@ public class Farm {
         }
     }
 
-    public void MainMenu(){
+    public static void MainMenu(){
         boolean looping = true;
         while(looping) {
             System.out.println("What would you like to do?");
@@ -64,14 +64,14 @@ public class Farm {
         }
     }
 
-    File folder = new File("folder");
-    File animals =  new File("folder/animals.txt");
-    File crops = new File("folder/crops.txt");
-    File animal = new File("folder/animal.txt");
+    static File folder = new File("folder");
+    static File animals =  new File("folder/animals.txt");
+    static File crops = new File("folder/crops.txt");
+    static File animal = new File("folder/animal.txt");
 
-    private void Save(){
+    private static void Save(){
         try {
-            FileWriter fw = new FileWriter(animal);
+            FileWriter fw = new FileWriter(animals);
             BufferedWriter bw = new BufferedWriter(fw);
             for(Animal a : aManager.GetAnimals()){
                 bw.write(a.GetCSV(a.getAcceptableCropTypes()));
@@ -82,7 +82,7 @@ public class Farm {
         catch(IOException e){
 
         }
-        /*try {
+        try {
             FileWriter fw = new FileWriter(crops);
             BufferedWriter bw = new BufferedWriter(fw);
             for(Crop c : cManager.GetCrops()){
@@ -93,11 +93,11 @@ public class Farm {
         }
         catch(IOException e){
 
-        }*/
+        }
     }
-    public void Load() {
+    public static void Load() {
         folder.mkdir();
-        /*try {
+        try {
             FileReader fr = new FileReader(crops);
             BufferedReader br = new BufferedReader(fr);
             String nextLine = br.readLine();
@@ -115,7 +115,7 @@ public class Farm {
             }
         } catch (IOException e) {
 
-        }*/
+        }
         try {
             FileReader fr = new FileReader(animal);
             BufferedReader br = new BufferedReader(fr);

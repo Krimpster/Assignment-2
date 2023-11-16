@@ -32,7 +32,8 @@ public class Animal extends Entity{
         for(String s : acceptableCropTypes) {
             aList.add(s);
         }
-        return name + "," + species + "," +  aList;
+        String commaList = aList.toString().replace("[","").replace("]","").replace(" ","");
+        return name + "," + species + "," + commaList;
     }
 
 
