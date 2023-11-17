@@ -111,7 +111,7 @@ public class AnimalManager {
                     for (Animal animal : animalList){
                         System.out.println("ID: " + animal.getId() + ", Name: " + animal.getName());
                     }
-                    System.out.println("Which animal would you like to feed? ");
+                    System.out.println("Which animal would you like to feed? (ID)");
                     boolean found = false;
                     int idToFind = Integer.parseInt(scan.nextLine());
                     for (Animal animal : animalList) {
@@ -124,7 +124,7 @@ public class AnimalManager {
                                     }
                                 }
                             }
-                            System.out.println("Which crop do you want to feed the animal? ");
+                            System.out.println("Which crop do you want to feed the animal? (ID)");
                             int idToFind2 = Integer.parseInt(scan.nextLine());
                             for (Crop c : cManager.GetCrops()) {
                                 if(c.getId() == idToFind2) {
