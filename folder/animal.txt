@@ -1,5 +1,0 @@
-Clever,Dog,4
-Billy,Goat,1
-Clive,Cow,1
-Carl,Cow,1
-Sven,Cat,4,3

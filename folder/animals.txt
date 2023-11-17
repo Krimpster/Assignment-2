@@ -1,2 +1,6 @@
-Clever,Dog,4
-Billy,Goat,1,2,3
+Clever,Dog,3
+Billy,Goat,1,2,3,4,5
+Clive,Cow,1,2
+Carl,Cow,1,2
+Sven,Cat,3,4
+Sally,Cat,3,4

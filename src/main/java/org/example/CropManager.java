@@ -55,20 +55,20 @@ public class CropManager {
                 return;
             }
         }
-        System.out.println("Crop ID not found, let's add it to the list instead.\nWhat should the crops name be: ");
+        System.out.println("Crop ID not found, let's add it to the list instead.\nWhat should the crops name be? ");
         String name = scan.nextLine();
-        System.out.println("What type of crop is it:");
+        System.out.println("What type of crop is it? ");
         String type = scan.nextLine();;
-        System.out.println("How many of these crops do you have: ");
+        System.out.println("How many of these crops do you have? ");
         int quantity = Integer.parseInt(scan.nextLine());
         Crop c = new Crop(name, type, quantity);
         cropList.add(c);
         System.out.println("Crop added successfully!");
     }
     private void RemoveCrop() {
-        boolean removed = false;
         ViewCrops();
-        System.out.println("Which crop do you want to exterminate from the farm (ID): ");
+        boolean removed = false;
+        System.out.println("Which crop do you want to exterminate from the farm (ID)? ");
         int check = Integer.parseInt(scan.nextLine());
         for(int i = 0; cropList.size() > i; i++){
             if(cropList.get(i).getId() == check){
@@ -78,7 +78,7 @@ public class CropManager {
             }
         }
         if(!removed){
-            System.out.println("Animal with that ID could not be found, try again.");
+            System.out.println("Crop with that ID could not be found, try again.");
             RemoveCrop();
         }
     }

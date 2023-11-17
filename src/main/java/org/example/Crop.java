@@ -42,9 +42,9 @@ public class Crop extends Entity{
 
     public boolean TakeCrop(int quantity) {
         boolean fed = false;
-            if (quantity >= 1) {
+            if (this.quantity >= quantity) {
                 fed = true;
-                this.quantity--;
+                this.quantity -= quantity;
             }
         return fed;
     }

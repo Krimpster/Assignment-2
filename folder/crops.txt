@@ -1,4 +1,6 @@
 Wheat,Cereal,50
-Corn,Cereal,33
-Meat,Meat,45
+Corn,Cereal,18
+Meat,Meat,40
 Grubs,Insects,40
+Grass,Grass,57
+Hay,Grass,60

@@ -23,9 +23,7 @@ public class AnimalManager {
             String check = scan.nextLine();
             switch (check) {
                 case "1":
-                    for (Animal animal : animalList){
-                        animal.GetDescription();
-                    }
+                    ViewAnimals();
                     break;
                 case "2":
                     AddAnimal();
@@ -34,15 +32,11 @@ public class AnimalManager {
                     RemoveAnimal();
                     break;
                 case "4":
-                    //FeedAnimals();
+                    FeedAnimals();
                     break;
                 case "5":
                     Farm.MainMenu();
                     return;
-                case "6":
-                    for(Animal a : animalList){
-                        System.out.println(a.GetCSV(a.getAcceptableCropTypes()));
-                    }
                 default:
                     System.out.println("Input was invalid!");
                     break;
@@ -50,16 +44,29 @@ public class AnimalManager {
         }
     }
     private void ViewAnimals(){
+        ArrayList<String> cList = new ArrayList<>();
         for (Animal animal : animalList){
-            System.out.println("ID: " + animal.getId() + ", name: " + animal.getName() + ", species: "
-                    + animal.getSpecies() + ", eats crops with the IDs: " + animal.getAcceptableCropTypes() + ".");
+            System.out.println("Id: " + animal.getId() + ", Name: " + animal.getName()
+                    + ", Species: " + animal.getSpecies() + ", Eats: " + GetFoodList(animal) + ".\n");
         }
+    }
+
+    private String GetFoodList(Animal animal){
+        ArrayList<String> cList = new ArrayList<>();
+            for (Crop crop : cManager.GetCrops()) {
+                for (String s : animal.getAcceptableCropTypes()) {
+                    if (crop.getId() == Integer.parseInt(s)) {
+                        cList.add(crop.getName());
+                    }
+                }
+            }
+        return cList.toString().replace("[", "").replace("]", "");
     }
     private void AddAnimal(){
         ViewAnimals();
-        System.out.println("What is the name of the animal you want to add: ");
+        System.out.println("What is the name of the animal you want to add? ");
         String name = scan.nextLine();
-        System.out.println("What species is the animal: ");
+        System.out.println("What species is the animal? ");
         String spec = scan.nextLine();
         System.out.println("Input the ID of the crops the animal can eat, input '*' to end inputting: ");
         boolean looping = true;
@@ -76,14 +83,14 @@ public class AnimalManager {
         animalList.add(new Animal(name, spec, accList));
     }
     private void RemoveAnimal(){
-        boolean removed = false;
         ViewAnimals();
-        System.out.println("Which animal do you want to put to pasture (ID): ");
+        boolean removed = false;
+        System.out.println("Which animal do you want to put to pasture (ID)? ");
         int check = Integer.parseInt(scan.nextLine());
         for(int i = 0; animalList.size() > i; i++){
             if(animalList.get(i).getId() == check){
                 animalList.remove(i);
-                System.out.println("Animal with ID " + check + " successfully removed");
+                System.out.println("Animal with ID " + check + " successfully removed.");
                 removed = true;
             }
         }
@@ -94,23 +101,48 @@ public class AnimalManager {
     }
 
     // Should find a link between acceptableCropTypes and Crop ID
-    /*private void FeedAnimals(){
+    private void FeedAnimals(){
         boolean looping = true;
-        System.out.println("Would you like to feed the animals? (y/n)");
+        System.out.println("Would you like to feed some of the animals? (y/n)");
         String input = scan.nextLine();
         while(looping) {
             switch (input) {
                 case "y":
-                    looping = false;
-                    for (Crop c : cManager.GetCrops()){
-                        for(Animal a : animalList){
-                            for(String s : a.getAcceptableCropTypes()) {
-                                if (c.id == Integer.parseInt(s)){
-                                    a.Feed();
+                    for (Animal animal : animalList){
+                        System.out.println("ID: " + animal.getId() + ", Name: " + animal.getName());
+                    }
+                    System.out.println("Which animal would you like to feed? ");
+                    boolean found = false;
+                    int idToFind = Integer.parseInt(scan.nextLine());
+                    for (Animal animal : animalList) {
+                        if (animal.getId() == idToFind) {
+                            found = true;
+                            for(Crop crop : cManager.GetCrops()) {
+                                for (String string : animal.getAcceptableCropTypes()) {
+                                    if (Integer.parseInt(string) == crop.id) {
+                                        System.out.println("ID: " + crop.getId() + ", Name: " + crop.getName() + ", Storage quantity: " + crop.getQuantity());
+                                    }
+                                }
+                            }
+                            System.out.println("Which crop do you want to feed the animal? ");
+                            int idToFind2 = Integer.parseInt(scan.nextLine());
+                            for (Crop c : cManager.GetCrops()) {
+                                if(c.getId() == idToFind2) {
+                                    for (String s : animal.getAcceptableCropTypes()) {
+                                        if (c.id == Integer.parseInt(s)) {
+                                            animal.Feed(c);
+                                            looping = false;
+                                        }
+                                    }
                                 }
                             }
                         }
-                }
+                    }
+                    if(!found){
+                        System.out.println("That ID could not be found, try again.");
+                        looping = true;
+                    }
+
                     break;
                 case "n":
                     looping = false;
@@ -119,9 +151,9 @@ public class AnimalManager {
                 case "Default":
                     System.out.println("Input was invalid.");
                     break;
+                }
             }
-        }
-    }*/
+    }
     public void ToList(String name, String species, ArrayList<String> accList){
         animalList.add(new Animal(name, species, accList));
     }

@@ -24,7 +24,7 @@ public class Farm {
             System.out.println("1. Manage animals.");
             System.out.println("2. Manage crops.");
             System.out.println("3. Save progress.");
-            System.out.println("4. Load file.");
+            System.out.println("4. Load file, only recommended when you want to return to a prior state of progress.");
             System.out.println("5. Quit");
             String check = scan.nextLine();
             switch(check) {
@@ -67,7 +67,6 @@ public class Farm {
     static File folder = new File("folder");
     static File animals =  new File("folder/animals.txt");
     static File crops = new File("folder/crops.txt");
-    static File animal = new File("folder/animal.txt");
 
     private static void Save(){
         try {
@@ -117,7 +116,7 @@ public class Farm {
 
         }
         try {
-            FileReader fr = new FileReader(animal);
+            FileReader fr = new FileReader(animals);
             BufferedReader br = new BufferedReader(fr);
             String nextLine = br.readLine();
             while(nextLine != null) {

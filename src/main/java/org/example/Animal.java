@@ -1,12 +1,13 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Animal extends Entity{
     public String species;
     private ArrayList<String> acceptableCropTypes = new ArrayList<>();
+    static Scanner scan = new Scanner(System.in);
     static int nextId = 1;
-    AnimalManager aM;
 
     public Animal(String name, String species, ArrayList<String> acceptableCropTypes) {
         super(nextId,name);
@@ -37,11 +38,15 @@ public class Animal extends Entity{
     }
 
 
-    /*public void Feed(Crop crop){
-        if(crop.TakeCrop() = true){
-
+    public static void Feed(Crop crop){
+        System.out.println("How many crops do you want to feed the animal with? ");
+        int quantity = Integer.parseInt(scan.nextLine());
+        if (crop.TakeCrop(quantity)) {
+            System.out.println("Animal has been fed.");
+        } else {
+            System.out.println("There wasn't enough feed in storage to feed the animal.");
         }
-    }*/
+    }
 
     public ArrayList<String> getAcceptableCropTypes() {
         return acceptableCropTypes;
