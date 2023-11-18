@@ -9,6 +9,7 @@ public class Animal extends Entity{
     static Scanner scan = new Scanner(System.in);
     static int nextId = 1;
 
+    // The main constructor for the Animal class, used to give any animal object values.
     public Animal(String name, String species, ArrayList<String> acceptableCropTypes) {
         super(nextId,name);
         nextId++;
@@ -22,12 +23,14 @@ public class Animal extends Entity{
         this.acceptableCropTypes = acceptableCropTypes;
     }
 
+    // Isn't actually used by anything currently but would list all values for an animal object of called, even the unmodified acceptableCropType list.
     @Override
     public void GetDescription(){
         System.out.println("This animal has the id " + getId() + ", it is named," + getName()
                 + "\nis of " + getSpecies() + " species and accepts only " + getAcceptableCropTypes() + " crops.\n");
     }
 
+    // Used to generate a CSV of an animal object for storage in a text file.
     public String GetCSV(ArrayList<String> acceptableCropTypes){
         ArrayList<String> aList = new ArrayList<>();
         for(String s : acceptableCropTypes) {
@@ -37,7 +40,11 @@ public class Animal extends Entity{
         return name + "," + species + "," + commaList;
     }
 
-
+    // Called by the FeedAnimal method when a match between an animals acceptableCropType IDs and an ID in the crop list is found.
+    // If this happens the user will be prompted with how many of the stock that matches the ID that they want to feed the animal with.
+    // This number will then be used as a parameter when calling the TakeCrop method.
+    // If TakeCrop decides that there are enough crops in stock it will return true,
+    // which will result in the animal being fed and the program returning to the animal menu.
     public static void Feed(Crop crop){
         System.out.println("How many crops do you want to feed the animal with? ");
         int quantity = Integer.parseInt(scan.nextLine());
@@ -48,6 +55,7 @@ public class Animal extends Entity{
         }
     }
 
+    // Getters and setter for the animal class.
     public ArrayList<String> getAcceptableCropTypes() {
         return acceptableCropTypes;
     }

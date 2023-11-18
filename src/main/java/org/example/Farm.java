@@ -2,7 +2,6 @@ package org.example;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Farm {
@@ -17,6 +16,8 @@ public class Farm {
         }
     }
 
+    // This is the main menu that the program opens into, here you can choose to either interact with the animals or crops
+    // or you can save and load the two files containing the animal and crop objects.
     public static void MainMenu(){
         boolean looping = true;
         while(looping) {
@@ -63,11 +64,12 @@ public class Farm {
             }
         }
     }
-
+    // Creates the folder and files that the save and load systems use.
     static File folder = new File("folder");
     static File animals =  new File("folder/animals.txt");
     static File crops = new File("folder/crops.txt");
 
+    //This is the save method for the program.
     private static void Save(){
         try {
             FileWriter fw = new FileWriter(animals);
@@ -94,6 +96,8 @@ public class Farm {
 
         }
     }
+
+    // this is the load method for the program.
     public static void Load() {
         folder.mkdir();
         try {

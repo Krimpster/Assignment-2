@@ -1,6 +1,5 @@
 package org.example;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Crop extends Entity{
@@ -18,6 +17,8 @@ public class Crop extends Entity{
         this.cropType = cropType;
         this.quantity = quantity;
     }
+
+    // The main constructor of the Crop class.
     public Crop(String name, String cropType, int quantity){
         super(nextId, name);
         nextId++;
@@ -25,21 +26,26 @@ public class Crop extends Entity{
         this.quantity = quantity;
     }
 
+    // When called this will list out all values for given crop object.
     @Override
     public void GetDescription(){
         System.out.println("This crop has the id " + getId() + ", it is named " + getName() + ",\nis of " + getCropType()
                 + " type and there are " + getQuantity() + " left of it in stock.\n");
     }
 
+    // Returns a given crop object in CSV form for storage in a text file.
     @Override
     public String GetCSV(){
         return name + "," + cropType + "," + quantity;
     }
 
+    // Called by the AddCrop method in CropManager to increase the amount of stock that a given crop has.
     public void AddCrop(int quantity){
         this.quantity += quantity;
     }
 
+    // Used by the Feed method to compare the quantity that the user input with the available stock for a given crop object.
+    // If there is enough stock the quantity will be taken away from it and the method will return true, if there isn't the method simply returns false.
     public boolean TakeCrop(int quantity) {
         boolean fed = false;
             if (this.quantity >= quantity) {
@@ -49,6 +55,7 @@ public class Crop extends Entity{
         return fed;
     }
 
+    // Getters and setters for the Crop class.
     public String getCropType() {
         return cropType;
     }

@@ -1,7 +1,4 @@
 package org.example;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,6 +8,7 @@ public class AnimalManager {
     Scanner scan = new Scanner(System.in);
     CropManager cManager = new CropManager();
 
+    // This is the animal submenu, here you can interact with the animals in different ways.
     public void AnimalMenu(){
         boolean looping = true;
         while (looping) {
@@ -43,6 +41,8 @@ public class AnimalManager {
             }
         }
     }
+
+    // This method goes through the list of animal objects and lists them on the terminal.
     private void ViewAnimals(){
         ArrayList<String> cList = new ArrayList<>();
         for (Animal animal : animalList){
@@ -51,6 +51,8 @@ public class AnimalManager {
         }
     }
 
+    // This method takes the ArrayList that contains the crop types an animal can and transforms it into
+    // a string to be fed back to the ViewAnimals method.
     private String GetFoodList(Animal animal){
         ArrayList<String> cList = new ArrayList<>();
             for (Crop crop : cManager.GetCrops()) {
@@ -62,6 +64,8 @@ public class AnimalManager {
             }
         return cList.toString().replace("[", "").replace("]", "");
     }
+
+    // This method is used to add new animal objects into the animal list.
     private void AddAnimal(){
         ViewAnimals();
         System.out.println("What is the name of the animal you want to add? ");
@@ -82,6 +86,8 @@ public class AnimalManager {
         }
         animalList.add(new Animal(name, spec, accList));
     }
+
+    // This method is used to remove a specific index from the animal list.
     private void RemoveAnimal(){
         ViewAnimals();
         boolean removed = false;
@@ -100,7 +106,12 @@ public class AnimalManager {
         }
     }
 
-    // Should find a link between acceptableCropTypes and Crop ID
+    // This method is used for "feeding" the animals contained in the animal list.
+    // The method will open up to a yes or no question, asking if you want to feed the animals.
+    // If yes then the method will go through the list of animals and display them on the terminal and you will be prompted with a question of which
+    // ID you want to feed. It will then look for a match of ID between the user input and the animals in animal list. If a match
+    // is found the method will go through the list of Crops and compare the animals acceptableCropType IDs with the IDs of the crops in the crop list
+    // If a match is found the method will call on a different method named Feed that has the parameter of the crop we just found in the list.
     private void FeedAnimals(){
         boolean looping = true;
         System.out.println("Would you like to feed some of the animals? (y/n)");
@@ -154,9 +165,13 @@ public class AnimalManager {
                 }
             }
     }
+
+    // Is used by the Load method to input animal objects into the animal list from a text file.
     public void ToList(String name, String species, ArrayList<String> accList){
         animalList.add(new Animal(name, species, accList));
     }
+
+    // Is used by the program at large to retrieve the animal list.
     public ArrayList<Animal> GetAnimals(){
         return animalList;
     }

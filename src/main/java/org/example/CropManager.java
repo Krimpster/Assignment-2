@@ -7,6 +7,7 @@ public class CropManager {
     public static ArrayList<Crop> cropList = new ArrayList<>();
     Scanner scan = new Scanner(System.in);
 
+    // This is the crop menu, here you can interact with crops in different ways.
     public void CropMenu() {
         boolean looping = true;
         while (looping) {
@@ -37,12 +38,16 @@ public class CropManager {
             }
         }
     }
+
+    // When called it lists out all values for the crop objects in the crop list.
     public void ViewCrops() {
         for(Crop crop : cropList){
             System.out.println("Crop ID: " + crop.getId() + ", Crop name: " +  crop.getName()
                     + ", Crop type: " + crop.getCropType() + ", quantity: " + crop.getQuantity());;
         }
     }
+
+    // Allows for the user to add stock to existing crops or to add new crop objects to the crop list.
     private void AddCrop() {
         ViewCrops();
         System.out.println("What crop do you want to add to (ID): ");
@@ -65,6 +70,8 @@ public class CropManager {
         cropList.add(c);
         System.out.println("Crop added successfully!");
     }
+
+    // Allows the user to remove a specific index from the crop list.
     private void RemoveCrop() {
         ViewCrops();
         boolean removed = false;
@@ -82,9 +89,13 @@ public class CropManager {
             RemoveCrop();
         }
     }
+
+    // Used by the Load method to add crop objects into the crop list from a text file.
     public void ToList(String name, String cropType, int quantity){
         cropList.add(new Crop(name, cropType, quantity));
     }
+
+    // Used by the program as a whole to retrieve the crop list.
     public ArrayList<Crop> GetCrops(){
         return cropList;
     }
