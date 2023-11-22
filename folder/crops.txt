@@ -2,5 +2,5 @@ Wheat,Cereal,50
 Corn,Cereal,18
 Meat,Meat,33
 Grubs,Insects,40
-Grass,Grass,57
+Grass,Grass,55
 Hay,Grass,60
