@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CropManager {
-    public static ArrayList<Crop> cropList = new ArrayList<>();
+    public ArrayList<Crop> cropList = new ArrayList<>();
     Scanner scan = new Scanner(System.in);
 
     // This is the crop menu, here you can interact with crops in different ways.

@@ -30,7 +30,7 @@ public class Farm {
             String check = scan.nextLine();
             switch(check) {
                 case "1":
-                    aManager.AnimalMenu();
+                    aManager.AnimalMenu(cManager.GetCrops());
                     looping = false;
                     break;
                 case "2":
